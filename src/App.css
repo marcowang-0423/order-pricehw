@@ -723,3 +723,7 @@ span.ham-menu-bar3--touch {
 .card-body {
   padding: 1rem;
 }
+.orderlist{
+  display: flex;
+  flex-direction:column;
+}

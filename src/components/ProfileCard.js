@@ -1,7 +1,7 @@
 import React, { useContext,useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Input, Button } from "antd";
-import { logoutFromFirebase, updateUserInfo,storeOrderId } from "../actions";
+import { logoutFromFirebase, updateUserInfo,storeOrderId,storeOrderItem } from "../actions";
 import { StoreContext } from "../store";
 import {getOrderByUser} from "../api";
 const ProfileCard = () => {
@@ -11,9 +11,11 @@ const ProfileCard = () => {
     },
     state: {orderId:{orderres}},
     state:{orderid},
+    state:{orderitem},
     dispatch,
   } = useContext(StoreContext);
   console.log(orderid);
+  console.log(orderitem);
   const { displayName, email } = userInfo;
   const history = useHistory();
   const [form] = Form.useForm();
@@ -28,17 +30,28 @@ const ProfileCard = () => {
     history.push("/");
   };
   const checkorder = () => {
-    let id=[];
-    id=storeOrderId(dispatch);
+    let id;
+    storeOrderItem(dispatch);
+    storeOrderId(dispatch);
     setopen(!open);
     console.log(id);
+    console.log(orderid);
     // history.push("/placeorder");
   }
   const clickorderid=(id)=>{
+    console.log(id);
+    console.log(orderid[orderitem.indexOf(id)]);
+    history.push("/order/"+orderid[orderitem.indexOf(id)]);
+  }
+  const addnum=() => {
+    if(num<4){
+      setnum(num+1);
+    }
     
-    history.push("/order/"+id);
+    console.log(num);
   }
   const [open,setopen]=useState(false);
+  const [num,setnum]=useState(0);
   return (
     <Form
       onFinish={handleUpdate}
@@ -144,8 +157,11 @@ const ProfileCard = () => {
         </Button>
         {open
           ?(
-            orderid.map((id)=>
-              <Button onClick={()=>clickorderid(id)}>{id}</Button>
+            
+            orderitem.map((id)=>
+            <div className="orderlist">
+              <Button onClick={()=>clickorderid(id)}>Price:{id}</Button>
+            </div>
             )
             
           ):(

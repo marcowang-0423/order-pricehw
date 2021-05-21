@@ -34,7 +34,8 @@ import {
   BEGIN_ORDER_DETAIL,
   SUCCESS_ORDER_DETAIL,
   FAIL_ORDER_DETAIL,
-  GET_ORDER_BY_USER
+  GET_ORDER_BY_USER,
+  GET_ORDER_ITEM_BY_USER
 } from "../utils/constants";
 
 export const StoreContext = createContext();
@@ -119,6 +120,7 @@ const initialState = {
     orderres: { id: []},
   },
   orderid:[],
+  orderitem:[],
 };
 
 function reducer(state, action) {
@@ -379,6 +381,13 @@ function reducer(state, action) {
         },
         orderid:action.payload
       };
+      case GET_ORDER_ITEM_BY_USER:
+        console.log(action.payload);
+     
+        return {
+          ...state,
+          orderitem:action.payload
+        };
     default:
       return state;
   }

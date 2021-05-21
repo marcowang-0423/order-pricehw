@@ -32,7 +32,8 @@ import {
   BEGIN_ORDER_DETAIL,
   SUCCESS_ORDER_DETAIL,
   FAIL_ORDER_DETAIL,
-  GET_ORDER_BY_USER
+  GET_ORDER_BY_USER,
+  GET_ORDER_ITEM_BY_USER
 } from "../utils/constants";
 
 import {
@@ -46,7 +47,8 @@ import {
   createOrderApi,
   getOrderById,
   checkLoginApi,
-  getOrderByUser
+  getOrderByUser,
+  getOrderItemByUser
 } from "../api";
 
 export const addCartItem = (dispatch, product, qty) => {
@@ -285,6 +287,20 @@ export const storeOrderId=async (dispatch) => {
       payload:userOrder
     });
     return userOrder;
+  }catch (error) {
+   
+    console.error(error);
+  }
+}
+export const storeOrderItem=async (dispatch) => {
+  try{
+    const userOrderItem =await getOrderItemByUser();
+    console.log(userOrderItem );
+    dispatch({ 
+      type:GET_ORDER_ITEM_BY_USER,
+      payload:userOrderItem 
+    });
+    return userOrderItem ;
   }catch (error) {
    
     console.error(error);
