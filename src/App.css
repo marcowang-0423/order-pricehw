@@ -727,3 +727,6 @@ span.ham-menu-bar3--touch {
   display: flex;
   flex-direction:column;
 }
+.orderCheck{
+  margin-top:20px;
+}

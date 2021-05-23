@@ -123,7 +123,7 @@ export const getOrderItemByUser = async () => {
   // QUERY Orders
   const querySnapshot = await allOrdersCollectionRef.where("user", "==", user).get();
   querySnapshot.forEach((doc) => {
-    jsonOrdersItem.push(doc.data().totalPrice);
+    jsonOrdersItem.push(doc.data().id);
   });
   console.log(jsonOrdersItem);
   return jsonOrdersItem;

@@ -29,6 +29,7 @@ const ProfileCard = () => {
     logoutFromFirebase(dispatch);
     history.push("/");
   };
+  
   const checkorder = () => {
     let id;
     storeOrderItem(dispatch);
@@ -153,14 +154,14 @@ const ProfileCard = () => {
           className="login-form__button"
           onClick={checkorder}
         >
-          Check out my order
+          Order Check
         </Button>
         {open
           ?(
             
             orderitem.map((id)=>
             <div className="orderlist">
-              <Button onClick={()=>clickorderid(id)}>Price:{id}</Button>
+              <Button onClick={()=>clickorderid(id)}>Number:{id}</Button>
             </div>
             )
             
@@ -168,6 +169,7 @@ const ProfileCard = () => {
             <div></div>
           )
         }
+        
       </Form.Item>
     </Form>
   );
